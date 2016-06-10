@@ -49,7 +49,7 @@
     <form class="form-horizontal" action=insert.php method=post>
     <div class="form-group">
     <label for="inputEmail" class="col-sm-2 control-label">아이디</label>
-	<input type= "submit" value = "중복확인" class="btn btn-primary">
+	   <button type="button" class="btn btn-primary">중복확인</button>
     <div class="col-sm-6">
     <input type="userid" class="form-control" name ="id" placeholder="아이디">
     </div>
@@ -74,7 +74,7 @@
       <p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
     </div>
     </div>
-	
+
     <div class="form-group">
     <label for="usernumber" class="col-sm-2 control-label">학번</label>
     <div class="col-sm-6">
@@ -88,10 +88,6 @@
     </div>
     </div>
     <div class="form-group">
-    <label for="nickName" class="col-sm-2 control-label">닉네임</label>
-    <div class="col-sm-6">
-    <input type="text" class="form-control" id="inputName" placeholder="닉네임">
-    </div>
     </div>
     <div class="form-group">
     <label for="inputName" class="col-sm-2 control-label"></label>
@@ -99,7 +95,7 @@
       <input type= "submit" value = "회원가입" class="btn btn-primary " >
     </div>
     </div>
-		
+
     </form>
 	</form>
   </article>
