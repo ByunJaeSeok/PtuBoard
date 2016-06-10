@@ -88,6 +88,12 @@
     </div>
     </div>
     <div class="form-group">
+    <label for="nickName" class="col-sm-2 control-label">닉네임</label>
+    <div class="col-sm-6">
+    <input type="text" class="form-control" id="inputName" placeholder="닉네임">
+    </div>
+    </div>
+    <div class="form-group">
     <label for="inputName" class="col-sm-2 control-label"></label>
     <div class="col-sm-6">
       <input type= "submit" value = "회원가입" class="btn btn-primary " >
