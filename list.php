@@ -4,6 +4,7 @@ if(!$no||$no<0){
   $no=0;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +19,8 @@ if(!$no||$no<0){
     .nav {height: 80px;}
     .navbar-brand {padding: 30px;}
     .navbar-nav>li>a {padding-bottom: 15px; line-height: 50px;}
+    .table-hover {text-align: center;}
+    .table th {text-align:center;}
   </style>
 </head>
 <body>
@@ -57,25 +60,23 @@ if(!$no||$no<0){
     </ul>
   </div>
 </nav>
+<div class="container">
+  <div class="contentwrap">
+  <article class="container">
+    <div class="page-header">
+	  <h1>&emsp;&emsp;중고장터</h1>
+    </div>
 
-<table width=800 border=0  cellpadding=2 cellspacing=1 bgcolor=#777777 align = "center">
-<tr height=20 bgcolor=#999999>
-    <td width=30 align=center>
-        <font color=white>번호</font>
-    </td>
-    <td width=150  align=center>
-        <font color=white>제 목</font>
-    </td>
-    <td width=50 align=center>
-        <font color=white>글쓴이</font>
-    </td>
-    <td width=100 align=center>
-        <font color=white>날 짜</font>
-    </td>
-    <td width=40 align=center>
-        <font  color=white>조회수</font>
-    </td>
-</tr>
+<table class="table table-hover">
+  <thead align-text="center">
+    <tr>
+      <th>번호</th>
+      <th width=300>제 목</th>
+      <th>글쓴이</th>
+      <th>날 짜</th>
+      <th>조회수</th>
+    </tr>
+    </thead>
 
 	<?
 		include "db_info.php";
@@ -101,27 +102,29 @@ if(!$no||$no<0){
 
 		while($row = mysql_fetch_array($result)) {
 	     ?>
+       <tbody>
 	      <tr>
-		      <td height=20  bgcolor=white align = "center">
+		      <td>
 			      <a href=#<?=$row['num']?>&no=<?=$no?>><?=$row['num']?></a>
 		      </td>
 
-		      <td height=20  bgcolor=white align = "center">
+		      <td>
 		        <a href=#<?=$row['num']?>&no=<?=$no?>&name=<?=$row['id']?>><?=strip_tags($row['title'], '<b><i>');?></a>
           </td>
 
-	        <td align=center height=20 bgcolor=white>
+	        <td>
 	         <font  color=black><?=$row['id']?></font>
 	        </td>
 
-	        <td align=center height=20 bgcolor=white>
+	        <td>
 	         <font  color=black><?=$row['wdate']?></font>
 	        </td>
 
-	        <td align=center height=20 bgcolor=white>
+	        <td>
 	         <font  color=black><?=$row['view']?></font>
 	        </td>
         </tr>
+      </tbody>
 	<?
 		}
 		mysql_close($conn);
