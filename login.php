@@ -69,7 +69,7 @@ $pass = $_POST['pass'];
    
      echo("
        <script>
-         location.href='./index_login.php';
+         location.href='./index.php';
        </script>
      ");
    }

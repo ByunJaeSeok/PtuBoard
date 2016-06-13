@@ -1,9 +1,3 @@
-<?
-    if(!isset($_SESSION))
-    {
-        session_start();
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,42 +31,50 @@
         </ul>
       </li>
       <li><a href="list.php">중고장터</a></li>
+
       <li><a href="#">수강신청</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
+     <?
+		if (!@$_SESSION['userid']) {
+	?>
       <li><a href="member_form.php"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
-      <li class="active"><a href="login_form.php"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+      <li><a href="login_form.php"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+	<?
+		}
+		else {
+	?>
+	  <li><a href=""><span class="glyphicon glyphicon-user"  ></span> <? echo $_SESSION['userid']; ?></a></li>
+	  <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> 로그아웃</a></li>
+	 <?
+		}
+	 ?>
     </ul>
   </div>
 </nav>
-<div class="container">
-      <div class="row">
+	<?
 
-        <div class="page-header">
-          <div class="col-sm-2"></div>
-          <h2>로그인</h2>
-        </div>
-        <div class="col-sm-2"></div>
-        <div class="col-md-6">
-          <div class="login-box well">
-        <form accept-charset="UTF-8" role="form" method="post" action="login.php">
-            <legend>로그인</legend>
-            <div class="form-group">
-                <label for="username">아이디</label>
-                <input name="id" value='' id="username" placeholder="아이디 입력" type="text" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="password">비밀번호</label>
-                <input name="pass" id="password" value='' placeholder="비밀번호 입력" type="password" class="form-control" />
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" value="로그인" />
-            </div>
-        </form>
-          </div>
-        </div>
-      </div>
-    </div>
+		$id = $_SESSION['id'];
+		$pass = $_POST['pass'];
+		$title = $_POST['title'];
+		$content = $_POST['content'];
+		@$remote_addr = $_POST['remote_addr'];
+   
+		include "db_info.php";
 
-</body>
-</html>
+		$query = "INSERT INTO board
+		(num, id, pass, title, content, wdate, view)
+		VALUES ('', '$id', '$pass', '$title', '$content',
+		now(), 0)";
+
+		$result=mysql_query($query, $conn);
+
+		mysql_close($conn);
+
+		echo ("<meta http-equiv='Refresh' content='1; URL=list.php'>");
+		echo("
+			<script>
+			window.alert('글이 작성되었습니다.')
+			</script>
+			");
+	?>

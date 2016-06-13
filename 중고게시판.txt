@@ -1,0 +1,13 @@
+    CREATE TABLE board (
+        num int(20) unsigned NOT NULL auto_increment,
+        id varchar(20) NOT NULL,
+        pass varchar(12) NOT NULL,
+        title varchar(70) NOT NULL,
+        content text NOT NULL,
+        wdate datetime NOT NULL,
+        view int(11) NOT NULL DEFAULT 0,
+        PRIMARY KEY (num)
+    );
+
+
+INSERT INTO board (num, id, pass, title, content, wdate, view) VALUES ('', 'jwlee0202', '1234', '연습', '이 내용은 연습 글입니다.', now(), 1);

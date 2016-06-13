@@ -16,7 +16,6 @@
 </head>
 <body>
 
-
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -32,11 +31,24 @@
         </ul>
       </li>
       <li><a href="list.php">중고장터</a></li>
+
       <li><a href="#">수강신청</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li class="active"><a href="member_form.php"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
+     <?
+		if (!@$_SESSION['userid']) {
+	?>
+      <li><a href="member_form.php"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
       <li><a href="login_form.php"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+	<?
+		}
+		else {
+	?>
+	  <li><a href=""><span class="glyphicon glyphicon-user"  ></span> <? echo $_SESSION['userid']; ?></a></li>
+	  <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> 로그아웃</a></li>
+	 <?
+		}
+	 ?>
     </ul>
   </div>
 </nav>
@@ -44,25 +56,23 @@
   <div class="contentwrap">
   <article class="container">
     <div class="page-header">
-	  <h1>&emsp;&emsp;회원가입</h1>
+	  <h1 align = "center">중고장터 글쓰기</h1>
     </div>
-    <form class="form-horizontal" action=insert.php method=post>
+    <form class="form-horizontal" action=write_insert.php method=post>
     <div class="form-group">
     <label for="inputEmail" class="col-sm-2 control-label">아이디</label>
-    <div class="col-sm-6">
-    <input type="userid" class="form-control" name ="id" placeholder="아이디">
-    </div>
+    <div class="col-sm-6"><?=$_SESSION['userid']?></div>
     </div>
 	<div class="form-group">
-    <label for="inputName" class="col-sm-2 control-label">닉네임</label>
+    <label for="inputName" class="col-sm-2 control-label">제 목</label>
     <div class="col-sm-6">
-    <input type="text" class="form-control" name ="nick" placeholder="닉네임">
+    <input type="text" class="form-control" name ="title" placeholder="제 목">
     </div>
     </div>
     <div class="form-group">
     <label for="inputPassword" class="col-sm-2 control-label">비밀번호</label>
     <div class="col-sm-6">
-    <input type="password" class="form-control" name = "pass" placeholder="비밀번호">
+    <input type="password" class="form-control" name = "pass" placeholder="삭제할때 필요합니다.">
     <p class="help-block">숫자, 특수문자 포함 8자 이상</p>
     </div>
     </div>
@@ -75,21 +85,17 @@
     </div>
 
     <div class="form-group">
-    <label for="usernumber" class="col-sm-2 control-label">학번</label>
+    <label for="usernumber" class="col-sm-2 control-label">내용</label>
     <div class="col-sm-6">
-    <input type="text" class="form-control" name ="hak" placeholder="학번">
-    </div>
-    </div>
-    <div class="form-group">
-    <label for="inputName" class="col-sm-2 control-label">이름</label>
-    <div class="col-sm-6">
-    <input type="text" class="form-control" name ="name" placeholder="이름">
+    <textarea class="form-control" cols = 80 rows = 10 name ="content" placeholder="내용을 입력하세요."></textarea>
     </div>
     </div>
     <div class="form-group">
     <label for="inputName" class="col-sm-2 control-label"></label>
-    <div class="col-sm-6">
-      <input type= "submit" value = "회원가입" class="btn btn-primary " >
+    <div class="col-sm-6" align = "right" >
+      <input type= "submit" value = "글쓰기" class="btn btn-primary " >
+	  <input type= "reset" value = "다시 쓰기" class="btn btn-primary " >
+	  <input type= "button" value = "취소" class="btn btn-primary " onclick = "history.go(-1)" >
     </div>
     </div>
 

@@ -30,7 +30,8 @@
           <li><a href="#">Page 1-3</a></li>
         </ul>
       </li>
-      <li><a href="#">중고장터</a></li>
+      <li><a href="list.php">중고장터</a></li>
+
       <li><a href="#">수강신청</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
