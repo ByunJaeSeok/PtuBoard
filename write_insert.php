@@ -1,3 +1,6 @@
+<?
+$id = $_GET['id'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,12 +57,12 @@
 </nav>
 	<?
 
-		$id = $_SESSION['id'];
+		$id = $_SESSION['userid'];
 		$pass = $_POST['pass'];
 		$title = $_POST['title'];
 		$content = $_POST['content'];
 		@$remote_addr = $_POST['remote_addr'];
-   
+
 		include "db_info.php";
 
 		$query = "INSERT INTO board

@@ -1,3 +1,9 @@
+<?
+$no=@$_GET['no'];
+if(!$no||$no<0){
+  $no=0;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,29 +68,30 @@
     </td>
     <td width=50 align=center>
         <font color=white>글쓴이</font>
-    </td>        
+    </td>
     <td width=100 align=center>
         <font color=white>날 짜</font>
     </td>
     <td width=40 align=center>
         <font  color=white>조회수</font>
-    </td>     
+    </td>
 </tr>
 
 	<?
 		include "db_info.php";
 
-		$page_size=10;  
+		$page_size=10;
 		$page_list_size = 10;
 
-		if (!@$no || @$no < 0) @$no=0;
+		if (!$no || $no < 0) $no=0;
+    $page_first_id = $no*10;
 
-		$query = "select * from board order by num desc limit $no, $page_size";
+		$query = "select * from board order by num desc limit $page_first_id, $page_size";
 		$result = mysql_query($query, $conn);
 
 		$result_count=mysql_query("select count(*) from board",$conn);
 		$result_row = mysql_fetch_row($result_count);
-		$total_row = $result_row[0]; 
+		$total_row = $result_row[0];
 
 		if ($total_row <= 0) $total_row = 0;
 
@@ -93,43 +100,37 @@
 		$current_page = floor($no/$page_size);
 
 		while($row = mysql_fetch_array($result)) {
+	     ?>
+	      <tr>
+		      <td height=20  bgcolor=white align = "center">
+			      <a href=#<?=$row['num']?>&no=<?=$no?>><?=$row['num']?></a>
+		      </td>
 
-	?>
+		      <td height=20  bgcolor=white align = "center">
+		        <a href=#<?=$row['num']?>&no=<?=$no?>&name=<?=$row['id']?>><?=strip_tags($row['title'], '<b><i>');?></a>
+          </td>
 
-	<tr>
-    
-		<td height=20  bgcolor=white align = "center">
-			<a href=#?num=<?=$row['num']?>&no=<?=$no?>><?=$row['num']?></a>
-		</td>
-	   
-		<td height=20  bgcolor=white align = "center">
-			<a href=#?num=<?=$row['num']?>&no=<?=$no?>&name=<?=$row['id']?>><?=strip_tags($row['title'], '<b><i>');?></a>	
-		</td>
+	        <td align=center height=20 bgcolor=white>
+	         <font  color=black><?=$row['id']?></font>
+	        </td>
 
-		<td align=center height=20 bgcolor=white>
-			<font  color=black><?=$row['id']?></font>
-		</td>
-    
-		<td align=center height=20 bgcolor=white>
-			<font  color=black><?=$row['wdate']?></font>
-		</td>
-    
-		<td align=center height=20 bgcolor=white>
-			<font  color=black><?=$row['view']?></font>
-		</td>
-    
-	</tr>
+	        <td align=center height=20 bgcolor=white>
+	         <font  color=black><?=$row['wdate']?></font>
+	        </td>
 
+	        <td align=center height=20 bgcolor=white>
+	         <font  color=black><?=$row['view']?></font>
+	        </td>
+        </tr>
 	<?
-		} 
+		}
 		mysql_close($conn);
 	?>
 	</table>
-
-	<table border=0>
+  <table width=800 border=0  cellpadding=2 cellspacing=1 bgcolor=#777777 align = "center">
 		<tr>
-		<td width=600 height=20 align=center rowspan=4>
-		<font  color=gray>
+		<td height=20 align=center rowspan=4>
+		<font  color=black>
 		&nbsp;
 
 		<?
@@ -147,15 +148,15 @@
 
 		for ($i=$start_page;$i <= $end_page;$i++) {
 
-			$page=$page_size*$i; 
+			$page=$page_size*$i;
 			$page_num = $i+1;
-    
-			if ($no!=$page){ 
+
+			if ($no!=$page){
 				echo "<a href=\"$PHP_SELF?no=$page\">";
 			 }
-    
+
 			echo " $page_num ";
-    
+
 			 if ($no!=$page){
 				 echo "</a>";
 			 }
@@ -163,11 +164,12 @@
 		}
 
 
-		if($total_page > $end_page) { 
+		if($total_page > $end_page) {
 			$next_list = ($end_page + 1)* $page_size;
 			echo "<a href=$PHP_SELF?no=$next_list>▶</a><p>";
 		}
 ?>
+<br>
 <a href=write.php>글쓰기</a>
 </font>
 </td>
