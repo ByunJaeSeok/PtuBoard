@@ -35,8 +35,9 @@ $pass = $_POST['pass'];
  include "db_info.php";
 
  $sql="select * from member where id='$id'";
- $result=mysql_query($sql, $conn);
- $num_match=mysql_num_rows($result);
+ $result = mysql_query($sql, $conn);
+ $num_match = mysql_num_rows($result);
+
  if(!$num_match)
  {
    echo("
@@ -48,10 +49,10 @@ $pass = $_POST['pass'];
  }
  else
  {
-   $row=mysql_fetch_array($result);
-   $db_pass=$row['pass'];
+   $row = mysql_fetch_array($result);
+   $db_pass = $row['pass'];
 
-   if($pass!=$db_pass)
+   if($pass != $db_pass)
    {
      echo("
        <script>
@@ -63,18 +64,12 @@ $pass = $_POST['pass'];
    }
    else
    {
-     $userid=$row['id'];
-    //  $username=$row['name'];
-    //  $userid = $_POST['userid'];
-    //  $username = $_POST['username'];
-    //  $usernick=$row['nick'];
-     $_SESSION['userid']=$userid;
-    //  $_SESSION['username']=$username;
-    //  $_SESSION['usernick']=$usernick;
-
+     $userid = $row['id'];
+     $_SESSION['userid']= $userid;
+   
      echo("
        <script>
-         location.href='./index.php';
+         location.href='./index_login.php';
        </script>
      ");
    }

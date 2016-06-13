@@ -49,7 +49,6 @@
     <form class="form-horizontal" action=insert.php method=post>
     <div class="form-group">
     <label for="inputEmail" class="col-sm-2 control-label">아이디</label>
-	   <button type="button" class="btn btn-primary">중복확인</button>
     <div class="col-sm-6">
     <input type="userid" class="form-control" name ="id" placeholder="아이디">
     </div>

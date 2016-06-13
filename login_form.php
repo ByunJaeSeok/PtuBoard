@@ -68,11 +68,6 @@
             <div class="form-group">
                 <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" value="로그인" />
             </div>
-            <span class='text-center'><a href="/bbs/index.php?mid=index&act=dispMemberFindAccount" class="text-sm">비밀번호 찾기</a></span>
-            <hr />
-            <div class="form-group">
-                <a href="" class="btn btn-default btn-block m-t-md"> 회원가입</a>
-            </div>
         </form>
           </div>
         </div>
