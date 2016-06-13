@@ -1,3 +1,9 @@
+<?
+    if(!isset($_SESSION))
+    {
+        session_start();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,15 +55,15 @@
         <div class="col-sm-2"></div>
         <div class="col-md-6">
           <div class="login-box well">
-        <form accept-charset="UTF-8" role="form" method="post" action="">
+        <form accept-charset="UTF-8" role="form" method="post" action="login.php">
             <legend>로그인</legend>
             <div class="form-group">
                 <label for="username">아이디</label>
-                <input name="user_id" value='' id="username" placeholder="아이디 입력" type="text" class="form-control" />
+                <input name="id" value='' id="username" placeholder="아이디 입력" type="text" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="password">비밀번호</label>
-                <input name="password" id="password" value='' placeholder="비밀번호 입력" type="password" class="form-control" />
+                <input name="pass" id="password" value='' placeholder="비밀번호 입력" type="password" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" value="로그인" />
