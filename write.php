@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -59,7 +59,7 @@
   <div class="contentwrap">
   <article class="container">
     <div class="page-header">
-	  <h1 align = "center">자유게시판 글쓰기</h1>
+	  <h1>&emsp;&emsp;자유게시판 글쓰기</h1>
     </div>
     <form class="form-horizontal" action=write_insert.php method=post>
     <div class="form-group">
