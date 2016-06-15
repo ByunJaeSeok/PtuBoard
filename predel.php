@@ -52,29 +52,47 @@
     </ul>
   </div>
 </nav>
-	<?
+<body>
+<center>
+<BR>
+<?
+	include "db_info.php";
 
-		$id = $_SESSION['userid'];
-		$pass = $_POST['pass'];
-		$title = $_POST['title'];
-		$content = $_POST['content'];
-		@$remote_addr = $_POST['remote_addr'];
+	$num = $_GET['num'];
+	
+	$query = "select * from board where num = $num";
+	$result = mysql_query($query, $conn);
+	$row = mysql_fetch_array($result);
 
-		include "db_info.php";
+if($row['id'] != $_SESSION['userid']) {
+		echo ("
+			 <script>
+			 alert('작성자만이 삭제 가능합니다.');
+			history.go(-1);
+			 </script>
+			 ");
+			exit;
+	}
+?>
+<!-- 입력된 값을 다음 페이지로 넘기기 위해 FORM을 만든다. -->
 
-		$query = "INSERT INTO board
-		(num, id, pass, title, content, wdate)
-		VALUES ('', '$id', '$pass', '$title', '$content',
-		now())";
-
-		$result=mysql_query($query, $conn);
-
-		mysql_close($conn);
-
-		echo ("<meta http-equiv='Refresh' content='1; URL=list.php'>");
-		echo("
-			<script>
-			window.alert('글이 작성되었습니다.')
-			</script>
-			");
-	?>
+ 
+<div class="container">
+  <div class="contentwrap">
+  <article class="container">
+  <form class="form-horizontal" action=del.php?num=<?=$num?> method=post>
+  <div class="form-group">
+    <label for="inputEmail" class="col-sm-2 control-label"></label>
+    <div class="col-sm-4">
+	<input type="password" class="form-control" name = "pass" placeholder="비밀번호를 입력해 주세요.">
+    <p class="help-block">비밀번호가 일치해야 합니다.</p>
+    </div>
+    </div>
+	<div class="form-group">
+    <label for="inputName" class="col-sm-2 control-label"></label>
+    <div class="col-sm-6" align = "center" >
+      <input type= "submit" value = "삭제하기" class="btn btn-primary " >
+	  <input type= "button" value = "취소" class="btn btn-primary " onclick = "history.go(-1)" >
+	</form>
+ </body>
+</html>

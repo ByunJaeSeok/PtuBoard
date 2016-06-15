@@ -3,6 +3,24 @@ $no=@$_GET['no'];
 if(!$no||$no<0){
   $no=0;
 }
+
+include "db_info.php";
+$page_size=4;
+$page_list_size=4;
+
+$query = "select * from board order by num desc limit $no,$page_size";
+$result = @mysql_query($query, $conn);
+
+$result_count = @mysql_query("select count(*) from board", $conn);
+$result_row = @mysql_fetch_row($result_count);
+$total_row = $result_row[0];
+
+if($total_row<=0){
+  $total_row=0;
+}
+$total_page = ceil($total_row / $page_size);
+
+$current_page = ceil(($no+1) / $page_size);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,10 +55,11 @@ if(!$no||$no<0){
         </ul>
       </li>
       <li><a href="list.php">중고장터</a></li>
+
       <li><a href="#">수강신청</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-	<?
+     <?
 		if (!@$_SESSION['userid']) {
 	?>
       <li><a href="member_form.php"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
@@ -57,124 +76,101 @@ if(!$no||$no<0){
     </ul>
   </div>
 </nav>
-
-<table width=800 border=0  cellpadding=2 cellspacing=1 bgcolor=#777777 align = "center">
-<tr height=20 bgcolor=#999999>
-    <td width=30 align=center>
-        <font color=white>번호</font>
-    </td>
-    <td width=150  align=center>
-        <font color=white>제 목</font>
-    </td>
-    <td width=50 align=center>
-        <font color=white>글쓴이</font>
-    </td>
-    <td width=100 align=center>
-        <font color=white>날 짜</font>
-    </td>
-    <td width=40 align=center>
-        <font  color=white>조회수</font>
-    </td>
-</tr>
-
-	<?
-		include "db_info.php";
-
-		$page_size=10;
-		$page_list_size = 10;
-
-		if (!$no || $no < 0) $no=0;
-    $page_first_id = $no*10;
-
-		$query = "select * from board order by num desc limit $page_first_id, $page_size";
-		$result = mysql_query($query, $conn);
-
-		$result_count=mysql_query("select count(*) from board",$conn);
-		$result_row = mysql_fetch_row($result_count);
-		$total_row = $result_row[0];
-
-		if ($total_row <= 0) $total_row = 0;
-
-		$total_page = floor(($total_row - 1) / $page_size);
-
-		$current_page = floor($no/$page_size);
-
-		while($row = mysql_fetch_array($result)) {
-	     ?>
-	      <tr>
-		      <td height=20  bgcolor=white align = "center">
-			      <a href=#<?=$row['num']?>&no=<?=$no?>><?=$row['num']?></a>
-		      </td>
-
-		      <td height=20  bgcolor=white align = "center">
-		        <a href=#<?=$row['num']?>&no=<?=$no?>&name=<?=$row['id']?>><?=strip_tags($row['title'], '<b><i>');?></a>
+      <br>
+      <table align = "center" width="580" border="0" cellpadding="2" cellspacing="1" bgcolor="#777777">
+        <tr height="20" bgcolor="#999999">
+          <td width="30" align="center">
+            <font color="white">번호</font>
           </td>
-
-	        <td align=center height=20 bgcolor=white>
-	         <font  color=black><?=$row['id']?></font>
-	        </td>
-
-	        <td align=center height=20 bgcolor=white>
-	         <font  color=black><?=$row['wdate']?></font>
-	        </td>
-
-	        <td align=center height=20 bgcolor=white>
-	         <font  color=black><?=$row['view']?></font>
-	        </td>
+          <td width="30" align="center">
+            <font color="white">제 목</font>
+          </td>
+          <td width="30" align="center">
+            <font color="white">글쓴이</font>
+          </td>
+          <td width="30" align="center">
+            <font color="white">날 짜</font>
+          </td>
         </tr>
-	<?
-		}
-		mysql_close($conn);
-	?>
-	</table>
-  <table width=800 border=0  cellpadding=2 cellspacing=1 bgcolor=#777777 align = "center">
-		<tr>
-		<td height=20 align=center rowspan=4>
-		<font  color=black>
-		&nbsp;
-
-		<?
-
-		$start_page = (int)($current_page / $page_list_size) * $page_list_size;
-
-		$end_page = $start_page + $page_list_size - 1;
-
-		if ($total_page < $end_page) $end_page = $total_page;
-
-		if ($start_page >= $page_list_size) {
-			$prev_list = ($start_page - 1)*$page_size;
-			echo  "<a href=\"$PHP_SELF?no=$prev_list\">◀</a>\n";
-		}
-
-		for ($i=$start_page;$i <= $end_page;$i++) {
-
-			$page=$page_size*$i;
-			$page_num = $i+1;
-
-			if ($no!=$page){
-				echo "<a href=\"$PHP_SELF?no=$page\">";
-			 }
-
-			echo " $page_num ";
-
-			 if ($no!=$page){
-				 echo "</a>";
-			 }
-
-		}
+        <?
+        while ($row=@mysql_fetch_array($result)) {
 
 
-		if($total_page > $end_page) {
-			$next_list = ($end_page + 1)* $page_size;
-			echo "<a href=$PHP_SELF?no=$next_list>▶</a><p>";
-		}
-?>
-<br>
-<a href=write.php>글쓰기</a>
-</font>
-</td>
-</tr>
-</table>
+        ?>
+        <tr>
+          <!-- 번호 -->
+          <td height="20" bgcolor="white" align="center">
+            <font color="black">
+              <?=$row['num']?>
+            </font>
+          </td>
+          <!-- 제목 -->
+		  
+          <td height="20" bgcolor="white">&nbsp;
+            <a href="read.php?num=<?=$row['num']?>">
+              <?=strip_tags($row['title'], '<b><i>');?>
+            </a>
+          </td>
+          <!-- 이름 -->
+          <td height="20" bgcolor="white" align="center">
+            <font color="black">
+                <?=$row['id']?>
+              </a>
+            </font>
+          </td>
+          <!-- 날짜 -->
+          <td height="20" bgcolor="white" align="center">
+            <font color="black"><?=$row['wdate']?></font>
+          </td>
+        </tr>
+        <?
+      }
+        mysql_close($conn);
+        ?>
+      </table>
+      <table border="0" align = "center" >
+        <tr>
+          <td width="600" height="20" align="center" rowsapn="4">
+            <font color="gray">
+              &nbsp;
+              <?
+              $start_page = floor(($current_page -1) / $page_list_size) * $page_list_size + 1;
+              $end_page = $start_page + $page_list_size - 1;
 
-</body>
+              if($total_page < $end_page){
+                $end_page = $total_page;
+              }
+              if($start_page >= $page_list_size){
+                $prev_list = ($start_page - 2) * $page_size;
+                echo "string";
+                echo "<a href=\"./list.php?no=$prev_list\"></a>\n";
+              }
+              for($i=$start_page; $i<=$end_page;$i++){
+                $page = ($i-1) * $page_size;
+                if($no!=$page){
+                  echo "<a href='./list.php?no=$page'>";
+                }
+                echo "$i";
+                if($no!=$page){
+                  echo "</a>";
+                }
+              }
+              if($total_page > $end_page){
+                $next_list = $end_page * $page_size;
+                echo "<a href=$PHP_SELF?no=$next_list></a>";
+              }
+              ?>
+			  
+            </font>
+			
+          </td>
+		 
+        </tr>
+		 
+      </table>
+	
+      <a href="write.php">글쓰기</a>
+	
+    </conter>
+  </body>
 </html>
