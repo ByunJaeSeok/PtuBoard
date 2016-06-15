@@ -6,7 +6,7 @@
   <meta name="Author" content="">
   <meta name="Keywords" content="">
   <meta name="Description" content="">
-  <title>Document</title>
+  <title>평택대학교 게시판</title>
  </head>
  <body>
   <?
@@ -44,7 +44,7 @@
 		mysql_close($conn);
 	}
 
-	
+
   ?>
  </body>
 </html>

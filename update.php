@@ -6,7 +6,7 @@
   <meta name="Author" content="">
   <meta name="Keywords" content="">
   <meta name="Description" content="">
-  <title>Document</title>
+  <title>평택대학교 게시판</title>
  </head>
  <body>
   <?
@@ -20,7 +20,7 @@
 		$result = mysql_query($query, $conn);
 		$row = mysql_fetch_array($result);
 
-		if ($pass == $row['pass']) { 
+		if ($pass == $row['pass']) {
 
 			$query = "update board set content ='$content' where num = $num ";
 			$result = mysql_query($query, $conn);
@@ -29,7 +29,7 @@
 			 alert('수정 되었습니다.');
 			 </script>
 			 ");
-		} 
+		}
 		else {
 			echo ("
 			 <script>

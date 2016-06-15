@@ -53,6 +53,11 @@
      $total = mysql_affected_rows();
      $pagesize=5;
  ?>
+ <div class="page-header">
+ <h1>&emsp;&emsp;&emsp;&emsp;방명록</h1><hr/>
+ <div class="row">
+    <div class="col-sm-1" style="background-color:white;"></div>
+    <div class="col-sm-9" style="background-color:white;">
 
    <FORM ACTION="insert.php" METHOD="POST">
    <form role="form">
@@ -74,8 +79,7 @@
     </form>
   </form>
 </FORM>
-</div>
-</body>
+
 
  <?
      for($i=@$_GET['no'] ; $i < @$_GET['no']+$pagesize ; $i++) {
@@ -99,6 +103,7 @@
        </tr>
      </tbody>
  </table>
+
  <?
          } //end if
      } //end for
@@ -111,3 +116,6 @@
          echo("<a href='$_SERVER[PHP_SELF]?no=$next'>다음</a></center>");
      }
  ?>
+</div>
+</div>
+</body>

@@ -6,7 +6,7 @@
   <meta name="Author" content="">
   <meta name="Keywords" content="">
   <meta name="Description" content="">
-  <title>Document</title>
+  <title>평택대학교 게시판</title>
  </head>
  <body>
   <?
@@ -28,7 +28,7 @@ if ($pass == $row['pass'] )
     alert('삭제 되었습니다.');
     </script>
     ");
-} 
+}
 else
 {
     echo ("

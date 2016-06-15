@@ -73,7 +73,7 @@ $current_page = ceil(($no+1) / $page_size);
   <div class="contentwrap">
   <article class="container">
     <div class="page-header">
-	  <h1>&emsp;&emsp;중고장터</h1>
+	  <h1>&emsp;&emsp;자유게시판</h1>
     </div>
 
   <table class="table table-hover">
@@ -148,17 +148,17 @@ $current_page = ceil(($no+1) / $page_size);
                 echo "<a href=$PHP_SELF?no=$next_list></a>";
               }
               ?>
-			  
+
             </font>
-			
+
           </td>
-		 
+
         </tr>
-		 
+
       </table>
-	
+
       <a href="write.php">글쓰기</a>
-	
+
     </conter>
   </body>
 </html>

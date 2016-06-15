@@ -6,7 +6,7 @@
   <meta name="Author" content="">
   <meta name="Keywords" content="">
   <meta name="Description" content="">
-  <title>Document</title>
+  <title>평택대학교 게시판</title>
  </head>
  <body>
 <?
@@ -20,7 +20,7 @@
 	$name = $_POST['name'];
 
 	if ($pass != $passcheck) {
-		
+
 			echo ("
 			<script>
 			alert('비밀번호가 일치하지 않습니다.');
@@ -28,7 +28,7 @@
 			</script>");
 	}
 	else if(!$id) {
-		
+
 		echo("
 		<script>
 		alert('아이디를 입력하세요.');
@@ -36,7 +36,7 @@
 		</script>");
 	}
 	else if(!$pass) {
-		 
+
 		echo("
 		<script>
 		alert('비밀번호를 입력하세요.');
@@ -44,7 +44,7 @@
 		</script>");
 	}
 	else if(!$nick) {
-		
+
 		echo("
 		<script>
 		alert('닉네임을 입력하세요.');
@@ -52,7 +52,7 @@
 		</script>");
 	}
 	else if(!$hak) {
-		
+
 		echo("
 		<script>
 		alert('학번을 입력하세요.');
@@ -60,14 +60,14 @@
 		</script>");
 	}
 	else if(!$name) {
-		
+
 		echo("
 		<script>
 		alert('이름 입력하세요.');
 		history.go(-1)
 		</script>");
 	}
-	else {	
+	else {
 		include "db_info.php";
 
 		$query = "select * from member where id = '$id'";
@@ -79,7 +79,7 @@
 		$num_record1 = mysql_num_rows($result1);
 
 		if($num_record) {
-			
+
 			echo("
 			<script>
 			alert('해당 아이디는 이미 사용중입니다.');
@@ -88,7 +88,7 @@
 		}
 
 		else if($num_record1) {
-			
+
 			echo("
 			<script>
 			alert('해당 닉네임은 이미 사용중입니다.');
@@ -108,9 +108,9 @@
 		<script>
 		alert('회원 가입이 완료되었습니다.');
 		</script>");
-		
+
 		}
-		
+
 	}
 
 ?>
