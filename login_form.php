@@ -28,16 +28,9 @@
       <a class="navbar-brand" href="index.php">평택대 게시판</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">공지사항</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티 <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-        </ul>
-      </li>
-      <li><a href="list.php">중고장터</a></li>
-      <li><a href="#">수강신청</a></li>
+      <li><a href="guestbook/list.php">방명록</a></li>
+      <li><a href="list.php">자유 게시판</a></li>
+      <li><a href="sukang.php">수강신청</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="member_form.php"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>

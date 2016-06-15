@@ -1,9 +1,7 @@
-<<<<<<< HEAD
-=======
 <?
 $id = @$_GET['id'];
 ?>
->>>>>>> origin/master
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,17 +26,9 @@ $id = @$_GET['id'];
       <a class="navbar-brand" href="index.php">평택대 게시판</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">공지사항</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티 <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-        </ul>
-      </li>
-      <li><a href="list.php">중고장터</a></li>
-
-      <li><a href="#">수강신청</a></li>
+      <li><a href="guestbook/list.php">방명록</a></li>
+      <li><a href="list.php">자유 게시판</a></li>
+      <li><a href="sukang.php">수강신청</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
      <?
@@ -59,15 +49,42 @@ $id = @$_GET['id'];
   </div>
 </nav>
 	<?
+	include "db_info.php";
 
-		$id = $_SESSION['userid'];
-		$pass = $_POST['pass'];
-		$title = $_POST['title'];
-		$content = $_POST['content'];
-		@$remote_addr = $_POST['remote_addr'];
+	$id = $_SESSION['userid'];
+	$title = $_POST['title'];
+	$pass = $_POST['pass'];
+	$content = $_POST['content'];
+	
 
+	if(!$title) {
+		
+		echo("
+		<script>
+		alert('제목을 입력하세요.');
+		history.go(-1)
+		</script>");
+	}
+	else if(!$pass) {
+		 
+		echo("
+		<script>
+		alert('비밀번호를 입력하세요.');
+		history.go(-1)
+		</script>");
+	}
+	else if(!$content) {
+		
+		echo("
+		<script>
+		alert('내용을 입력하세요.');
+		history.go(-1)
+		</script>");
+	}
+	else {	
 		include "db_info.php";
 
+		
 		$query = "INSERT INTO board
 		(num, id, pass, title, content, wdate)
 		VALUES ('', '$id', '$pass', '$title', '$content',
@@ -82,5 +99,7 @@ $id = @$_GET['id'];
 			<script>
 			window.alert('글이 작성되었습니다.')
 			</script>
-			");
-	?>
+			");		
+	}
+
+?>

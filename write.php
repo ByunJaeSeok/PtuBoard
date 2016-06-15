@@ -22,17 +22,9 @@
       <a class="navbar-brand" href="index.php">평택대 게시판</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">공지사항</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티 <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-        </ul>
-      </li>
-      <li><a href="list.php">중고장터</a></li>
-
-      <li><a href="#">수강신청</a></li>
+      <li><a href="guestbook/list.php">방명록</a></li>
+      <li><a href="list.php">자유 게시판</a></li>
+      <li><a href="sukang.php">수강신청</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
      <?
@@ -76,14 +68,6 @@
     <p class="help-block">숫자, 특수문자 포함 8자 이상</p>
     </div>
     </div>
-       <div class="form-group">
-    <label for="inputPasswordCheck" class="col-sm-2 control-label">비밀번호 확인</label>
-    <div class="col-sm-6">
-    <input type="password" class="form-control" name ="passcheck" placeholder="비밀번호 확인">
-      <p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
-    </div>
-    </div>
-
     <div class="form-group">
     <label for="usernumber" class="col-sm-2 control-label">내용</label>
     <div class="col-sm-6">
