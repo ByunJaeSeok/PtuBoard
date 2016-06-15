@@ -44,11 +44,22 @@
     </ul>
   </div>
 </nav>
+
+<?
+			if (!@$_SESSION['userid']) {
+			  echo ("
+				 <script>
+				 alert('로그인을 해 주세요.');
+				history.go(-1);
+				 </script>
+				 ");
+			  }
+		?>
 <div class="container">
   <div class="contentwrap">
   <article class="container">
     <div class="page-header">
-	  <h1 align = "center">중고장터 글쓰기</h1>
+	  <h1 align = "center">자유게시판 글쓰기</h1>
     </div>
     <form class="form-horizontal" action=write_insert.php method=post>
     <div class="form-group">
