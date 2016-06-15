@@ -53,7 +53,7 @@
 </nav>
 
 <div class="container">
-  <iframe frameborder="0" height="1000" width="100%" src="http://www.ptu.ac.kr">
+  <iframe frameborder="0" height="1000" width="100%" src="http://ec.ptu.ac.kr/~bjs1158">
   <p>Your browser does not support iframes.</p>
 </iframe>
 

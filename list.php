@@ -105,11 +105,13 @@ if(!$no||$no<0){
        <tbody>
 	      <tr>
 		      <td>
-			      <a href=#<?=$row['num']?>&no=<?=$no?>><?=$row['num']?></a>
+            <?=$row['num']?></a>
 		      </td>
 
 		      <td>
-		        <a href=#<?=$row['num']?>&no=<?=$no?>&name=<?=$row['id']?>><?=strip_tags($row['title'], '<b><i>');?></a>
+            <a href="read.php?id=<?=$row['id']?>">
+              <?=strip_tags($row['title'], '<b><i>');?>
+            </a>
           </td>
 
 	        <td>

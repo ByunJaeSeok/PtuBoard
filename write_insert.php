@@ -1,5 +1,5 @@
 <?
-$id = $_GET['id'];
+$id = @$_GET['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
