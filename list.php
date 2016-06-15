@@ -22,6 +22,7 @@ $total_page = ceil($total_row / $page_size);
 
 $current_page = ceil(($no+1) / $page_size);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +37,8 @@ $current_page = ceil(($no+1) / $page_size);
     .nav {height: 80px;}
     .navbar-brand {padding: 30px;}
     .navbar-nav>li>a {padding-bottom: 15px; line-height: 50px;}
+    .table-hover {text-align: center;}
+    .table th {text-align:center;}
   </style>
 </head>
 <body>
@@ -76,6 +79,7 @@ $current_page = ceil(($no+1) / $page_size);
     </ul>
   </div>
 </nav>
+
       <br>
       <table align = "center" width="580" border="0" cellpadding="2" cellspacing="1" bgcolor="#777777">
         <tr height="20" bgcolor="#999999">
@@ -94,6 +98,110 @@ $current_page = ceil(($no+1) / $page_size);
         </tr>
         <?
         while ($row=@mysql_fetch_array($result)) {
+			?>
+
+<div class="container">
+  <div class="contentwrap">
+  <article class="container">
+    <div class="page-header">
+	  <h1>&emsp;&emsp;중고장터</h1>
+    </div>
+
+<table class="table table-hover">
+  <thead align-text="center">
+    <tr>
+      <th>번호</th>
+      <th width=300>제 목</th>
+      <th>글쓴이</th>
+      <th>날 짜</th>
+      <th>조회수</th>
+    </tr>
+    </thead>
+
+	<?
+		include "db_info.php";
+
+		$page_size=10;
+		$page_list_size = 10;
+
+		if (!$no || $no < 0) $no=0;
+    $page_first_id = $no*10;
+
+		$query = "select * from board order by num desc limit $page_first_id, $page_size";
+		$result = mysql_query($query, $conn);
+
+		$result_count=mysql_query("select count(*) from board",$conn);
+		$result_row = mysql_fetch_row($result_count);
+		$total_row = $result_row[0];
+
+		if ($total_row <= 0) $total_row = 0;
+
+		$total_page = floor(($total_row - 1) / $page_size);
+
+		$current_page = floor($no/$page_size);
+
+		while($row = mysql_fetch_array($result)) {
+	     ?>
+       <tbody>
+	      <tr>
+		      <td>
+            <?=$row['num']?></a>
+		      </td>
+
+		      <td>
+            <a href="read.php?id=<?=$row['id']?>">
+              <?=strip_tags($row['title'], '<b><i>');?>
+            </a>
+          </td>
+
+	        <td>
+	         <font  color=black><?=$row['id']?></font>
+	        </td>
+
+	        <td>
+	         <font  color=black><?=$row['wdate']?></font>
+	        </td>
+
+	        <td>
+	         <font  color=black><?=$row['view']?></font>
+	        </td>
+        </tr>
+      </tbody>
+	<?
+		}
+		mysql_close($conn);
+	?>
+	</table>
+  <table width=800 border=0  cellpadding=2 cellspacing=1 bgcolor=#777777 align = "center">
+		<tr>
+		<td height=20 align=center rowspan=4>
+		<font  color=black>
+		&nbsp;
+
+		<?
+
+		$start_page = (int)($current_page / $page_list_size) * $page_list_size;
+
+		$end_page = $start_page + $page_list_size - 1;
+
+		if ($total_page < $end_page) $end_page = $total_page;
+
+		if ($start_page >= $page_list_size) {
+			$prev_list = ($start_page - 1)*$page_size;
+			echo  "<a href=\"$PHP_SELF?no=$prev_list\">◀</a>\n";
+		}
+
+		for ($i=$start_page;$i <= $end_page;$i++) {
+
+			$page=$page_size*$i;
+			$page_num = $i+1;
+
+			if ($no!=$page){
+				echo "<a href=\"$PHP_SELF?no=$page\">";
+			 }
+
+			echo " $page_num ";
+
 
 
         ?>

@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+<?
+$id = @$_GET['id'];
+?>
+>>>>>>> origin/master
 <!DOCTYPE html>
 <html lang="en">
 <head>
